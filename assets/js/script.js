@@ -2,22 +2,20 @@ const arrayOfTimes = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM",
 const arrayOfLabelEls = document.querySelectorAll(".lbl");
 const arrayOfTextareaEls = document.querySelectorAll(".textarea");
 
-function fillTimesAndCurrentDay() {    
-    $("#currentDay").text(moment().format("dddd, MMMM, Do"));
-    for (let i = 0; i < arrayOfLabelEls.length; i++) { arrayOfLabelEls[i].textContent = arrayOfTimes[i]; }    
+function populateCurrentDay() { $("#currentDay").text(moment().format("dddd, MMMM, Do")); }
+function populateTimeBlocks() {
+    for (let i = 0; i < arrayOfLabelEls.length; i++) { arrayOfLabelEls[i].textContent = arrayOfTimes[i]; }
 }
-function populateTextareas()
-{
+function populateTextareas() {
     const arrayOfTimes = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
-    for (let i = 0; i < arrayOfTimes.length; i++)
-    {
+    for (let i = 0; i < arrayOfTimes.length; i++) {
         if (localStorage.getItem(arrayOfTimes[i]) === null || localStorage.getItem(arrayOfTimes[i]) === "") { continue; }
         else { arrayOfTextareaEls[i].value = localStorage.getItem(arrayOfTimes[i]); }
-    }    
+    }
 }
-function colorCodeTimeBlocks() {    
+function colorCodeTimeBlocks() {
     const getCurrentHour = String(moment().hour())
-    const currentTime = moment(`${getCurrentHour}:00`,"HH:mm a");    
+    const currentTime = moment(`${getCurrentHour}:00`, "HH:mm a");
     let timeSlot;
     let hourTime;
     let amOrPm;
@@ -45,8 +43,8 @@ function submitClick(event) {
     localStorage.setItem(`${labelVal}`, `${txtVal}`);
 }
 
-
-fillTimesAndCurrentDay();
+populateCurrentDay();
+populateTimeBlocks();
 populateTextareas();
 colorCodeTimeBlocks();
 $(".btn").on("click", submitClick);

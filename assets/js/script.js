@@ -30,9 +30,9 @@ function colorCodeTimeBlocks() {
             amOrPm = time.substring(2);
         }
         timeSlot = moment(`${hourTime}:00 ${amOrPm}`, "HH:mm a");
-        if (currentTime.isBefore(timeSlot)) { arrayOfTextareaEls[i].style.backgroundColor = "lightgreen"; }
-        else if (currentTime.isAfter(timeSlot)) { arrayOfTextareaEls[i].style.backgroundColor = "lightgrey"; }
-        else { arrayOfTextareaEls[i].style.backgroundColor = "#F08080"; }
+        if (currentTime.isBefore(timeSlot)) { arrayOfTextareaEls[i].classList.add("future"); }
+        else if (currentTime.isAfter(timeSlot)) { arrayOfTextareaEls[i].classList.add("past"); }
+        else { arrayOfTextareaEls[i].classList.add("present"); }
     }
 }
 function submitClick(event) {
@@ -47,7 +47,7 @@ populateCurrentDay();
 populateTimeBlocks();
 populateTextareas();
 colorCodeTimeBlocks();
-$(".btn").on("click", submitClick);
-//$("#first-btn").on("submit", submitClick);   //DOES NOT WORK ASK WHY??!!!!!!!!!!!!!!
+$(".saveBtn").on("click", submitClick);
+
 
 
